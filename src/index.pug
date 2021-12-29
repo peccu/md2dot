@@ -1,0 +1,12 @@
+#app
+  div Please input like markdown itemize
+    div
+      textarea(v-model="code", rows="30", cols="50")
+  details
+    summary Parsed object
+    pre {{ doc }}
+  details
+    summary Generated dot
+    textarea(v-model="dot", rows="20", cols="50")
+  div(ref="graph")
+    svg
