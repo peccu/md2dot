@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - graphviz vue</title>
+  
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<div id="app">
+  <div>Please input like markdown itemize
+    <div>
+      <textarea v-model="code" rows="30" cols="50"></textarea>
+    </div>
+  </div>
+  <details>
+    <summary>Parsed object</summary>
+    <pre>{{ parsed }}</pre>
+  </details>
+  <details>
+    <summary>Generated dot</summary>
+    <textarea v-model="dot" rows="20" cols="50"></textarea>
+  </details>
+  <div>
+    <p v-if="message">Error message : {{ message }}</p>
+  </div>
+  <div ref="graph">
+    <svg></svg>
+  </div>
+</div>
+<!-- partial -->
+  <script src='https://cdn.jsdelivr.net/npm/vue@2.6.14'></script>
+<script src='https://unpkg.com/viz.js@2.1.2/viz.js'></script>
+<script src='https://unpkg.com/viz.js@2.1.2/full.render.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
