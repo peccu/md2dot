@@ -1,7 +1,7 @@
 const header = `digraph{
   node [style=rounded, shape=rect];
   shape=rect;
-  style=rounded; 
+  style=rounded;
 `;
 const footer = `}`;
 
