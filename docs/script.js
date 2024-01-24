@@ -112,6 +112,7 @@ new Vue({
           }
           if (e.depth > a[i + 1].depth) {
             // up = end subgraph
+            // TODO when the variance > 1, need to add more close
             return {
               type: "close",
               ...e
