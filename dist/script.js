@@ -8,8 +8,9 @@ const footer = `}`;
 new Vue({
   el: "#app",
   data: {
-    doc: null,
+    parsed: null,
     viz: null,
+    message: null,
     code: `- app : feed text app
   - browser
   - mail
@@ -32,16 +33,16 @@ new Vue({
   - pipe_items -> tmbr
   - mail -> mail_parser
   - mail_parser -> mongo_items
-  - mongo_items -> pipe_items
+  - mongo_items->pipe_items
   - action -> twitter
-  - action -> tumblr
+  - action-> tumblr
   - action -> label_category
   - rss -> fetcher
   - twitter -> fetcher
   - tumblr -> fetcher
   - fetcher -> mongo_items
-  - sources -> fetcher : target and \n when to retrieve
-  - fetcher -> sources : time \n to fetched
+  - sources -> fetcher : target and \\n when to retrieve
+  - fetcher -> sources : time \\n to fetched
 `,
     // https://stackoverflow.com/a/54605631
     graph: ""
@@ -56,9 +57,10 @@ new Vue({
   },
   computed: {
     dot() {
+      this.message = null;
       // parse and generate dot
-      this.doc = this.parse(this.code);
-      return this.gendot(this.doc);
+      this.parsed = this.parse(this.code);
+      return this.gendot(this.parsed);
     }
   },
   watch: {
@@ -162,6 +164,7 @@ new Vue({
         })
         .catch((error) => {
           this.viz = new Viz();
+          self.message = error;
           console.error(error);
         });
     }
