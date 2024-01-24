@@ -47,6 +47,7 @@ new Vue({
     graph: ""
   },
   mounted() {
+    // TODO load from localstorage
     // initialize
     this.viz = new Viz();
     // draw sample
@@ -63,6 +64,7 @@ new Vue({
   },
   watch: {
     code() {
+      // TODO store into localstorsge
       // redraw on code changed
       this.draw(this.dot);
     }
@@ -84,11 +86,12 @@ new Vue({
           return { depth: e.indent.length / 2, ...e };
         })
         .map((e) => {
-          // extract label
+          // split content into key and label
           const content = e.content.split(":");
           if (content.length > 1) {
             return {
               key: content[0].trim(),
+              // TODO join rest of content
               label: content[1].trim(),
               ...e
             };
@@ -99,10 +102,13 @@ new Vue({
           // detect start and end subgraph
           if (i + 1 == a.length) {
             // last = close
-            return e;
+            return {
+              type: "close",
+              ...e
+            };
           }
           if (i == 0 || e.depth < a[i + 1].depth) {
-            // first and down = start subgraph
+            // first or down = start subgraph
             return {
               type: "subgraph",
               ...e
@@ -124,6 +130,7 @@ new Vue({
         header +
         val
           .map((e) => {
+            // TODO check indent level
             const close = e.type == "close" ? "\n" + e.indent + "}" : "";
             const delim =
               e.type == "subgraph" ? "subgraph cluster_" + e.key + " {" : e.key;
