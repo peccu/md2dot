@@ -1,5 +1,5 @@
 import { expect, test } from "bun:test";
-import { parser, generate, type MdLine } from "./parser"
+import { parser, type MdLine } from "./parser"
 
 type Md = string
 type Case = [Md, MdLine[]]
