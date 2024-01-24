@@ -12,7 +12,7 @@ export const parser = (val: string): MdLine[] => {
   // input line format
   // <indent?>- <label>
   // <indent?>- <key>:<label>
-  // comment
+  // comment (ignore line)
   // <indent?>#.*
   return val
     .split("\n")
@@ -33,7 +33,7 @@ export const parser = (val: string): MdLine[] => {
       return { depth: e.indent.length / 2, ...e };
     })
     .map((e) => {
-      // extract label
+      // split content into key and label
       const content = e.content.split(":");
       if (content.length > 1) {
         return {
@@ -54,7 +54,7 @@ export const parser = (val: string): MdLine[] => {
         } as MdLine;
       }
       if (i == 0 || e.depth < a[i + 1].depth) {
-        // first and down = start subgraph
+        // first or down = start subgraph
         return {
           type: "subgraph",
           ...e
@@ -77,6 +77,7 @@ export const generate = (header: string, val: MdLine[], footer: string) => {
     header +
       val
         .map((e) => {
+          // TODO check indent level
           const close = e.type == "close" ? "\n" + e.indent + "}" : "";
           const delim =
             e.type == "subgraph" ? "subgraph cluster_" + e.key + " {" : e.key;

@@ -20,6 +20,7 @@ new Vue({
     graph: ""
   },
   mounted() {
+    // TODO load from localstorage
     // initialize
     this.viz = new Viz();
     // draw sample
@@ -37,6 +38,7 @@ new Vue({
   },
   watch: {
     code() {
+      // TODO store into localstorsge
       // redraw on code changed
       this.draw(this.dot);
     }
