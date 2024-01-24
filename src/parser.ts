@@ -19,7 +19,7 @@ export const parser = (val) => {
       if (content.length > 1) {
         return {
           key: content[0].trim(),
-          label: content[1].trim(),
+          label: content.slice(1).join(":").trim(),
           ...e
         };
       }
@@ -29,7 +29,10 @@ export const parser = (val) => {
       // detect start and end subgraph
       if (i + 1 == a.length) {
         // last = close
-        return e;
+        return {
+          type: "close",
+          ...e
+        };
       }
       if (i == 0 || e.depth < a[i + 1].depth) {
         // first and down = start subgraph
