@@ -1,5 +1,6 @@
 // @ts-nocheck
-import { parser, generate } from "./parser"
+import { parser } from "./parser"
+import { generator } from "./generator"
 import { sample } from "./sample"
 
 const header = `digraph{
@@ -7,7 +8,8 @@ const header = `digraph{
   shape=rect;
   style=rounded;
 `;
-const footer = `}`;
+const footer = `
+}`;
 
 new Vue({
   el: "#app",
@@ -33,7 +35,7 @@ new Vue({
       this.message = null;
       // parse and generate dot
       this.parsed = parser(this.code);
-      return generate(header, this.parsed, footer);
+      return generator(header, this.parsed, footer);
     }
   },
   watch: {

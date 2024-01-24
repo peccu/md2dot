@@ -72,36 +72,3 @@ export const parser = (val: string): MdLine[] => {
     });
 }
 
-export const generate = (header: string, val: MdLine[], footer: string) => {
-  return (
-    header +
-      val
-        .map((e) => {
-          // TODO check indent level
-          const close = e.type == "close" ? "\n" + e.indent + "}" : "";
-          const delim =
-            e.type == "subgraph" ? "subgraph cluster_" + e.key + " {" : e.key;
-          let label = "";
-          if (e.label) {
-            label =
-              "\n" +
-              e.indent +
-              (e.type == "subgraph"
-                ? '    label = "' + e.label + '"'
-                : '    [label = "' + e.label + '"]');
-          }
-          return {
-            output:
-            (e.type == "subgraph" ? "\n" : "") +
-              "  " +
-              e.indent +
-              delim +
-              label +
-              close
-          };
-        })
-        .map((e) => e.output)
-        .join("\n") +
-      footer
-  )
-}
