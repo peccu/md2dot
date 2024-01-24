@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { parser, generate } from "./parser"
 import { sample } from "./sample"
 
@@ -41,16 +42,16 @@ new Vue({
     }
   },
   methods: {
-    draw(code) {
+    draw(code: string) {
       // https://stackoverflow.com/a/54605631/514411
       const self = this;
       this.viz
         .renderSVGElement(code)
-        .then(function (element) {
+        .then((element: SVGSVGElement) => {
           const current = self.$refs.graph.firstChild;
           self.$refs.graph.replaceChild(element, current);
         })
-        .catch((error) => {
+        .catch((error: Error) => {
           this.viz = new Viz();
           self.message = error;
           console.error(error);

@@ -1,4 +1,19 @@
-export const parser = (val) => {
+export type MdLine = {
+  type: "subgraph" | "close";
+  key: string;
+  line: string;
+  indent: string;
+  content: string;
+  label?: string;
+  depth: number;
+}
+
+export const parser = (val: string): MdLine[] => {
+  // input line format
+  // <indent?>- <label>
+  // <indent?>- <key>:<label>
+  // comment
+  // <indent?>#.*
   return val
     .split("\n")
     .filter((line)=> {
@@ -36,14 +51,14 @@ export const parser = (val) => {
         return {
           type: "close",
           ...e
-        };
+        } as MdLine;
       }
       if (i == 0 || e.depth < a[i + 1].depth) {
         // first and down = start subgraph
         return {
           type: "subgraph",
           ...e
-        };
+        } as MdLine;
       }
       if (e.depth > a[i + 1].depth) {
         // up = end subgraph
@@ -51,13 +66,13 @@ export const parser = (val) => {
         return {
           type: "close",
           ...e
-        };
+        } as MdLine;
       }
-      return e;
+      return e as MdLine;
     });
 }
 
-export const generate = (header, val, footer) => {
+export const generate = (header: string, val: MdLine[], footer: string) => {
   return (
     header +
       val

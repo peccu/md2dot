@@ -1,7 +1,10 @@
 import { expect, test } from "bun:test";
-import { parser, generate } from "./parser"
+import { parser, generate, type MdLine } from "./parser"
 
-const depthcases = [
+type Md = string
+type Case = [Md, MdLine[]]
+
+const depthcases: Case[] = [
   [
     `- parent`,
     [{
@@ -11,7 +14,7 @@ const depthcases = [
       indent: "",
       content: "parent",
       type: "close"
-    }]
+    }] as MdLine[]
   ],
   [
     `- parent
@@ -30,7 +33,7 @@ const depthcases = [
       indent: "  ",
       content: "child",
       type: "close"
-    }]
+    }] as MdLine[]
   ],
   [
     `- parent
@@ -57,7 +60,7 @@ const depthcases = [
       indent: "    ",
       content: "grand child",
       type: "close"
-    }]
+    }] as MdLine[]
   ],
   [
     `- parent
@@ -92,7 +95,7 @@ const depthcases = [
       indent: "  ",
       content: "child2",
       type: "close"
-    }]
+    }] as MdLine[]
   ],
   [
     `- parent
@@ -127,7 +130,7 @@ const depthcases = [
       indent: "",
       content: "child2",
       type: "close"
-    }]
+    }] as MdLine[]
   ],
   [
     `- parent
@@ -170,7 +173,7 @@ const depthcases = [
       indent: "",
       content: "child2",
       type: "close"
-    }]
+    }] as MdLine[]
   ]
 ]
 
@@ -180,7 +183,7 @@ test.each(depthcases)("md to obj depth test %#", (md, expected) => {
   expect(parsed).toEqual(expected);
 });
 
-const commentcases = [
+const commentcases: Case[] = [
   [`- parent
   # comment
   - child`,
@@ -198,8 +201,9 @@ const commentcases = [
      indent: "  ",
      content: "child",
      type: "close"
-   }]
-  ],[`- parent
+   }] as MdLine[]
+  ],
+  [`- parent
 
   - child
 `,
@@ -217,7 +221,7 @@ const commentcases = [
      indent: "  ",
      content: "child",
      type: "close"
-   }]
+   }] as MdLine[]
   ]
 ]
 
