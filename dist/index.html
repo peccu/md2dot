@@ -16,12 +16,15 @@
   </div>
   <details>
     <summary>Parsed object</summary>
-    <pre>{{ doc }}</pre>
+    <pre>{{ parsed }}</pre>
   </details>
   <details>
     <summary>Generated dot</summary>
     <textarea v-model="dot" rows="20" cols="50"></textarea>
   </details>
+  <div>
+    <p v-if="message">Error message : {{ message }}</p>
+  </div>
   <div ref="graph">
     <svg></svg>
   </div>
