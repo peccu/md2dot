@@ -9,6 +9,7 @@
     "test": "bun test && bunx tsc"
   },
   "devDependencies": {
+    "@types/bun": "latest",
     "bun": "^1.0.25",
     "pug-cli": "^1.0.0-alpha6"
   },
