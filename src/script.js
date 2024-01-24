@@ -32,16 +32,16 @@ new Vue({
   - pipe_items -> tmbr
   - mail -> mail_parser
   - mail_parser -> mongo_items
-  - mongo_items->pipe_items
+  - mongo_items -> pipe_items
   - action -> twitter
-  - action-> tumblr
+  - action -> tumblr
   - action -> label_category
   - rss -> fetcher
   - twitter -> fetcher
   - tumblr -> fetcher
   - fetcher -> mongo_items
-  - sources -> fetcher : target and when to retrieve
-  - fetcher -> sources : time to fetched
+  - sources -> fetcher : target and \n when to retrieve
+  - fetcher -> sources : time \n to fetched
 `,
     // https://stackoverflow.com/a/54605631
     graph: ""
