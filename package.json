@@ -6,7 +6,7 @@
     "build": "bun run build:ts & bun run build:pug",
     "build:ts": "bun build src/script.ts --outdir ./dist",
     "build:pug": "bash -c 'cat src/head.html <(npx pug <src/partial.pug) src/tail.html > dist/index.html'",
-    "test": "bun test"
+    "test": "bun test && bunx tsc"
   },
   "devDependencies": {
     "bun": "^1.0.25",
