@@ -4,9 +4,11 @@
       textarea(v-model="code", rows="30", cols="50")
   details
     summary Parsed object
-    pre {{ doc }}
+    pre {{ parsed }}
   details
     summary Generated dot
     textarea(v-model="dot", rows="20", cols="50")
+  div
+    p(v-if="message") Error message : {{ message }}
   div(ref="graph")
     svg
