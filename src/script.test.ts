@@ -179,3 +179,50 @@ test.each(depthcases)("md to obj depth test %#", (md, expected) => {
   // console.log(JSON.stringify(parsed, null, 2));
   expect(parsed).toEqual(expected);
 });
+
+const commentcases = [
+  [`- parent
+  # comment
+  - child`,
+   [{
+     key: "parent",
+     depth: 0,
+     line: "- parent",
+     indent: "",
+     content: "parent",
+     type: "subgraph"
+   },{
+     key: "child",
+     depth: 1,
+     line: "  - child",
+     indent: "  ",
+     content: "child",
+     type: "close"
+   }]
+  ],[`- parent
+
+  - child
+`,
+   [{
+     key: "parent",
+     depth: 0,
+     line: "- parent",
+     indent: "",
+     content: "parent",
+     type: "subgraph"
+   },{
+     key: "child",
+     depth: 1,
+     line: "  - child",
+     indent: "  ",
+     content: "child",
+     type: "close"
+   }]
+  ]
+]
+
+test.each(commentcases)("md to obj comment test %#", (md, expected) => {
+  const parsed = parser(md)
+  // console.log(JSON.stringify(parsed, null, 2));
+  expect(parsed).toEqual(expected);
+});

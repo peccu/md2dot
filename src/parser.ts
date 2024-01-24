@@ -1,6 +1,10 @@
 export const parser = (val) => {
   return val
     .split("\n")
+    .filter((line)=> {
+      // skip blank line and comment only line
+      return line.trim().length > 0 && line.trim()[0] !== '#'
+    })
     .map((line) => {
       // split indent and content
       const content = line.split("- ");
