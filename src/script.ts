@@ -14,6 +14,7 @@ const footer = `
 new Vue({
   el: "#app",
   data: {
+    header,
     parsed: null,
     viz: null,
     message: null,
@@ -35,11 +36,16 @@ new Vue({
       this.message = null;
       // parse and generate dot
       this.parsed = parser(this.code);
-      return generator(header, this.parsed, footer);
+      return generator(this.header, this.parsed, footer);
     }
   },
   watch: {
     code() {
+      // TODO store into localstorsge
+      // redraw on code changed
+      this.draw(this.dot);
+    },
+    header() {
       // TODO store into localstorsge
       // redraw on code changed
       this.draw(this.dot);
