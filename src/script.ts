@@ -4,7 +4,9 @@ import { generator } from "./generator"
 import { sample } from "./sample"
 
 const header = `digraph{
-  node [style=rounded, shape=rect];
+  fontname="Helvetica,Arial,sans-serif";
+  node [fontname="Helvetica,Arial,sans-serif", style=rounded, shape=rect];
+  edge [fontname="Helvetica,Arial,sans-serif"];
   shape=rect;
   style=rounded;
 `;
